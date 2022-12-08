@@ -1,0 +1,586 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Pigaleve_project_mobileModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id_address" />
+          </Key>
+          <Property Name="id_address" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="locality" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BeautifulPlace">
+          <Key>
+            <PropertyRef Name="id_beautiful_place" />
+          </Key>
+          <Property Name="id_beautiful_place" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_address" Type="int" Nullable="false" />
+          <Property Name="id_type_locality" Type="int" Nullable="false" />
+          <Property Name="latitude" Type="float" Nullable="false" />
+          <Property Name="longitude" Type="float" Nullable="false" />
+          <Property Name="accepted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="id_davorites" />
+          </Key>
+          <Property Name="id_davorites" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_beautiful_place" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="id_grade" />
+          </Key>
+          <Property Name="id_grade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_beautiful_place" Type="int" Nullable="false" />
+          <Property Name="grade" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="id_image" />
+          </Key>
+          <Property Name="id_image" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id_beautiful_place" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeLocalitys">
+          <Key>
+            <PropertyRef Name="id_type_locality" />
+          </Key>
+          <Property Name="id_type_locality" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_locality" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_role" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BeautifulPlace_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="BeautifulPlace">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BeautifulPlace_TypeLocalitys">
+          <End Role="TypeLocalitys" Type="Self.TypeLocalitys" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLocalitys">
+              <PropertyRef Name="id_type_locality" />
+            </Principal>
+            <Dependent Role="BeautifulPlace">
+              <PropertyRef Name="id_type_locality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BeautifulPlace_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="BeautifulPlace">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorites_BeautifulPlace">
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeautifulPlace">
+              <PropertyRef Name="id_beautiful_place" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="id_beautiful_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorites_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_BeautifulPlace">
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeautifulPlace">
+              <PropertyRef Name="id_beautiful_place" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="id_beautiful_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_BeautifulPlace">
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeautifulPlace">
+              <PropertyRef Name="id_beautiful_place" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="id_beautiful_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Pigaleve_project_mobileModelContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BeautifulPlace" EntityType="Self.BeautifulPlace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favorites" EntityType="Self.Favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeLocalitys" EntityType="Self.TypeLocalitys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BeautifulPlace_Address" Association="Self.FK_BeautifulPlace_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BeautifulPlace_TypeLocalitys" Association="Self.FK_BeautifulPlace_TypeLocalitys">
+            <End Role="TypeLocalitys" EntitySet="TypeLocalitys" />
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BeautifulPlace_Users" Association="Self.FK_BeautifulPlace_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorites_BeautifulPlace" Association="Self.FK_Favorites_BeautifulPlace">
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorites_Users" Association="Self.FK_Favorites_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_BeautifulPlace" Association="Self.FK_Grades_BeautifulPlace">
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_Users" Association="Self.FK_Grades_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_BeautifulPlace" Association="Self.FK_Images_BeautifulPlace">
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Pigaleve_project_mobileModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id_address" />
+          </Key>
+          <Property Name="id_address" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="locality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BeautifulPlace" Relationship="Self.FK_BeautifulPlace_Address" FromRole="Address" ToRole="BeautifulPlace" />
+        </EntityType>
+        <EntityType Name="BeautifulPlace">
+          <Key>
+            <PropertyRef Name="id_beautiful_place" />
+          </Key>
+          <Property Name="id_beautiful_place" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_address" Type="Int32" Nullable="false" />
+          <Property Name="id_type_locality" Type="Int32" Nullable="false" />
+          <Property Name="latitude" Type="Double" Nullable="false" />
+          <Property Name="longitude" Type="Double" Nullable="false" />
+          <Property Name="accepted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_BeautifulPlace_Address" FromRole="BeautifulPlace" ToRole="Address" />
+          <NavigationProperty Name="TypeLocalitys" Relationship="Self.FK_BeautifulPlace_TypeLocalitys" FromRole="BeautifulPlace" ToRole="TypeLocalitys" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_BeautifulPlace_Users" FromRole="BeautifulPlace" ToRole="Users" />
+          <NavigationProperty Name="Favorites" Relationship="Self.FK_Favorites_BeautifulPlace" FromRole="BeautifulPlace" ToRole="Favorites" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_BeautifulPlace" FromRole="BeautifulPlace" ToRole="Grades" />
+          <NavigationProperty Name="Images" Relationship="Self.FK_Images_BeautifulPlace" FromRole="BeautifulPlace" ToRole="Images" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="id_davorites" />
+          </Key>
+          <Property Name="id_davorites" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_beautiful_place" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BeautifulPlace" Relationship="Self.FK_Favorites_BeautifulPlace" FromRole="Favorites" ToRole="BeautifulPlace" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Favorites_Users" FromRole="Favorites" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="id_grade" />
+          </Key>
+          <Property Name="id_grade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_beautiful_place" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BeautifulPlace" Relationship="Self.FK_Grades_BeautifulPlace" FromRole="Grades" ToRole="BeautifulPlace" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Grades_Users" FromRole="Grades" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="id_image" />
+          </Key>
+          <Property Name="id_image" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_beautiful_place" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BeautifulPlace" Relationship="Self.FK_Images_BeautifulPlace" FromRole="Images" ToRole="BeautifulPlace" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TypeLocalitys">
+          <Key>
+            <PropertyRef Name="id_type_locality" />
+          </Key>
+          <Property Name="id_type_locality" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_locality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BeautifulPlace" Relationship="Self.FK_BeautifulPlace_TypeLocalitys" FromRole="TypeLocalitys" ToRole="BeautifulPlace" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BeautifulPlace" Relationship="Self.FK_BeautifulPlace_Users" FromRole="Users" ToRole="BeautifulPlace" />
+          <NavigationProperty Name="Favorites" Relationship="Self.FK_Favorites_Users" FromRole="Users" ToRole="Favorites" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_Users" FromRole="Users" ToRole="Grades" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_BeautifulPlace_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="BeautifulPlace">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BeautifulPlace_TypeLocalitys">
+          <End Role="TypeLocalitys" Type="Self.TypeLocalitys" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLocalitys">
+              <PropertyRef Name="id_type_locality" />
+            </Principal>
+            <Dependent Role="BeautifulPlace">
+              <PropertyRef Name="id_type_locality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BeautifulPlace_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="BeautifulPlace">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorites_BeautifulPlace">
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeautifulPlace">
+              <PropertyRef Name="id_beautiful_place" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="id_beautiful_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_BeautifulPlace">
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeautifulPlace">
+              <PropertyRef Name="id_beautiful_place" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="id_beautiful_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_BeautifulPlace">
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeautifulPlace">
+              <PropertyRef Name="id_beautiful_place" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="id_beautiful_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorites_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseData" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="BeautifulPlace" EntityType="Self.BeautifulPlace" />
+          <EntitySet Name="Favorites" EntityType="Self.Favorites" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" />
+          <EntitySet Name="Images" EntityType="Self.Images" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="TypeLocalitys" EntityType="Self.TypeLocalitys" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_BeautifulPlace_Address" Association="Self.FK_BeautifulPlace_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BeautifulPlace_TypeLocalitys" Association="Self.FK_BeautifulPlace_TypeLocalitys">
+            <End Role="TypeLocalitys" EntitySet="TypeLocalitys" />
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BeautifulPlace_Users" Association="Self.FK_BeautifulPlace_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorites_BeautifulPlace" Association="Self.FK_Favorites_BeautifulPlace">
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_BeautifulPlace" Association="Self.FK_Grades_BeautifulPlace">
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_BeautifulPlace" Association="Self.FK_Images_BeautifulPlace">
+            <End Role="BeautifulPlace" EntitySet="BeautifulPlace" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorites_Users" Association="Self.FK_Favorites_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_Users" Association="Self.FK_Grades_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Pigaleve_project_mobileModelContainer" CdmEntityContainer="BaseData">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="locality" ColumnName="locality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BeautifulPlace">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.BeautifulPlace">
+              <MappingFragment StoreEntitySet="BeautifulPlace">
+                <ScalarProperty Name="id_beautiful_place" ColumnName="id_beautiful_place" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+                <ScalarProperty Name="id_type_locality" ColumnName="id_type_locality" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="accepted" ColumnName="accepted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favorites">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Favorites">
+              <MappingFragment StoreEntitySet="Favorites">
+                <ScalarProperty Name="id_davorites" ColumnName="id_davorites" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_beautiful_place" ColumnName="id_beautiful_place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Grades">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="id_grade" ColumnName="id_grade" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_beautiful_place" ColumnName="id_beautiful_place" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="id_image" ColumnName="id_image" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="id_beautiful_place" ColumnName="id_beautiful_place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeLocalitys">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.TypeLocalitys">
+              <MappingFragment StoreEntitySet="TypeLocalitys">
+                <ScalarProperty Name="id_type_locality" ColumnName="id_type_locality" />
+                <ScalarProperty Name="type_locality" ColumnName="type_locality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
