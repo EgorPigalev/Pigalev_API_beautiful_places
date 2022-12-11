@@ -13,6 +13,7 @@ namespace Pigalev_API_beautiful_places
     {
         protected void Application_Start()
         {
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

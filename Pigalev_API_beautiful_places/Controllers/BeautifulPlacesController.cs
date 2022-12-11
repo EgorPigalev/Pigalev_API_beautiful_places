@@ -16,11 +16,24 @@ namespace Pigalev_API_beautiful_places.Controllers
     {
         private BaseData db = new BaseData();
 
+        public BeautifulPlacesController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
+
         // GET: api/BeautifulPlaces
         [ResponseType(typeof(List<BeautifukPlacesModel>))]
-        public IHttpActionResult GetPhones()
+        public IHttpActionResult GetBeautifulPlace()
         {
             return Ok(db.BeautifulPlace.ToList().ConvertAll(x => new BeautifukPlacesModel(x)));
+        }
+
+        // GET: api/BeautifulPlaces/5
+        [ResponseType(typeof(BeautifulPlace))]
+        public IHttpActionResult GetCountBeautifulPlaceUser(int id_user)
+        {
+            List<BeautifulPlace> beautifulPlaces = db.BeautifulPlace.Where(x=>x.id_user == id_user).ToList();
+            return Ok(beautifulPlaces.Count);
         }
 
         // GET: api/BeautifulPlaces/5

@@ -15,10 +15,15 @@ namespace Pigalev_API_beautiful_places.Controllers
     public class RolesController : ApiController
     {
         private BaseData db = new BaseData();
+        public RolesController()
+        {
+
+            db.Configuration.ProxyCreationEnabled = false;
+        }
 
         // GET: api/Roles
         [ResponseType(typeof(List<RolesModels>))]
-        public IHttpActionResult GetPhones()
+        public IHttpActionResult GetRoles()
         {
             return Ok(db.Roles.ToList().ConvertAll(x => new RolesModels(x)));
         }

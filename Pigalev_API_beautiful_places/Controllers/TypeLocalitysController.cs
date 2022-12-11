@@ -18,7 +18,7 @@ namespace Pigalev_API_beautiful_places.Controllers
 
         // GET: api/TypeLocalitys
         [ResponseType(typeof(List<TypeLocalitysModels>))]
-        public IHttpActionResult GetPhones()
+        public IHttpActionResult GetTypeLocalitys()
         {
             return Ok(db.TypeLocalitys.ToList().ConvertAll(x => new TypeLocalitysModels(x)));
         }

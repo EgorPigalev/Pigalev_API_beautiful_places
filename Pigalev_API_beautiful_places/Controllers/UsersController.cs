@@ -16,6 +16,12 @@ namespace Pigalev_API_beautiful_places.Controllers
     {
         private BaseData db = new BaseData();
 
+        public UsersController()
+        {
+
+            db.Configuration.ProxyCreationEnabled = false;
+        }
+
         // GET: api/Users
         [ResponseType(typeof(List<UsersModels>))]
         public IHttpActionResult GetUsers()
@@ -40,16 +46,16 @@ namespace Pigalev_API_beautiful_places.Controllers
 
         // GET: api/Users
         [ResponseType(typeof(List<UsersModels>))] // Метод для авторизации
-        public bool GetUsersLogin(string login, string password)
+        public int GetUsersLogin(string login, string password)
         {
-            List<Users> users = db.Users.Where(x => x.login == login && x.password == password).ToList();
-            if (users.Count > 0)
+            Users user = db.Users.FirstOrDefault(x => x.login == login && x.password == password);
+            if (user != null)
             {
-                return true;
+                return user.id_user;
             }
             else
             {
-                return false;
+                return 0;
             }
         }
 
@@ -70,18 +76,19 @@ namespace Pigalev_API_beautiful_places.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsers(int id, Users users)
         {
-            if (!ModelState.IsValid)
+            Users user = db.Users.FirstOrDefault(x => x.id_user.Equals(id));
+
+            user.login = users.login;
+            user.password = users.password;
+            if(users.image == "null")
             {
-                return BadRequest(ModelState);
+                user.image = null;
             }
-
-            if (id != users.id_user)
+            else
             {
-                return BadRequest();
+                user.image = users.image;
             }
-
-            db.Entry(users).State = EntityState.Modified;
-
+            user.id_role = users.id_role;
             try
             {
                 db.SaveChanges();
@@ -97,9 +104,9 @@ namespace Pigalev_API_beautiful_places.Controllers
                     throw;
                 }
             }
-
             return StatusCode(HttpStatusCode.NoContent);
         }
+
 
         // POST: api/Users
         [ResponseType(typeof(Users))]
