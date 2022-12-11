@@ -73,6 +73,7 @@
           <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="image" Type="nvarchar(max)" />
           <Property Name="id_role" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_BeautifulPlace_Address">
@@ -361,6 +362,7 @@
           <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_role" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BeautifulPlace" Relationship="Pigaleve_project_mobileModel.FK_BeautifulPlace_Users" FromRole="Users" ToRole="BeautifulPlace" />
           <NavigationProperty Name="Favorites" Relationship="Pigaleve_project_mobileModel.FK_Favorites_Users" FromRole="Users" ToRole="Favorites" />
@@ -553,6 +555,7 @@
             <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />

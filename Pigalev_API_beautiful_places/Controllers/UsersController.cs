@@ -18,9 +18,39 @@ namespace Pigalev_API_beautiful_places.Controllers
 
         // GET: api/Users
         [ResponseType(typeof(List<UsersModels>))]
-        public IHttpActionResult GetPhones()
+        public IHttpActionResult GetUsers()
         {
             return Ok(db.Users.ToList().ConvertAll(x => new UsersModels(x)));
+        }
+
+        // GET: api/Users
+        [ResponseType(typeof(List<UsersModels>))] // Метод для проверки наличия пользователя в базе
+        public bool GetUsersRegistration(string login)
+        {
+            List<Users> users = db.Users.Where(x => x.login == login).ToList();
+            if(users.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // GET: api/Users
+        [ResponseType(typeof(List<UsersModels>))] // Метод для авторизации
+        public bool GetUsersLogin(string login, string password)
+        {
+            List<Users> users = db.Users.Where(x => x.login == login && x.password == password).ToList();
+            if (users.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         // GET: api/Users/5

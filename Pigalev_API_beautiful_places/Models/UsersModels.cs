@@ -11,6 +11,7 @@ namespace Pigalev_API_beautiful_places.Models
         public int id_user { get; set; }
         public string login { get; set; }
         public string password { get; set; }
+        public string image { get; set; }
         public int id_role { get; set; }
 
         public UsersModels(Users users)
@@ -18,6 +19,7 @@ namespace Pigalev_API_beautiful_places.Models
             id_user = users.id_user;
             login = users.login;
             password = users.password;
+            image = users.image;
             id_role = users.id_role;
         }
     }

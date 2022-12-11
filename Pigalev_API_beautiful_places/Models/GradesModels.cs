@@ -11,11 +11,11 @@ namespace Pigalev_API_beautiful_places.Models
         public int id_grade { get; set; }
         public int id_user { get; set; }
         public int id_beautiful_place { get; set; }
-        public GradesModels(GradesModels gradesModels)
+        public GradesModels(Grades grades)
         {
-            id_grade = gradesModels.id_grade;
-            id_user = gradesModels.id_user;
-            id_beautiful_place = gradesModels.id_beautiful_place;
+            id_grade = grades.id_grade;
+            id_user = grades.id_user;
+            id_beautiful_place = grades.id_beautiful_place;
         }
     }
 }

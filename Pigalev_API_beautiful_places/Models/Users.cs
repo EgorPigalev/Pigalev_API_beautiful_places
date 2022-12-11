@@ -25,6 +25,7 @@ namespace Pigalev_API_beautiful_places.Models
         public int id_user { get; set; }
         public string login { get; set; }
         public string password { get; set; }
+        public string image { get; set; }
         public int id_role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
