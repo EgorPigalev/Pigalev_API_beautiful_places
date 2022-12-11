@@ -17,7 +17,6 @@ namespace Pigalev_API_beautiful_places.Models
         public int id_grade { get; set; }
         public int id_user { get; set; }
         public int id_beautiful_place { get; set; }
-        public bool grade { get; set; }
     
         public virtual BeautifulPlace BeautifulPlace { get; set; }
         public virtual Users Users { get; set; }

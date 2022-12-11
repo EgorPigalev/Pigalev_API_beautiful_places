@@ -179,6 +179,7 @@
     <Compile Include="Models\Address.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdressModels.cs" />
     <Compile Include="Models\BaseData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,22 +202,28 @@
     <Compile Include="Models\Favorites.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FavoritesModels.cs" />
     <Compile Include="Models\Grades.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GradesModels.cs" />
     <Compile Include="Models\Images.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImagesModels.cs" />
     <Compile Include="Models\Roles.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RolesModels.cs" />
     <Compile Include="Models\TypeLocalitys.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsersModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\TypeLocalitysModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

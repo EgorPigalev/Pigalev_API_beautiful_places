@@ -17,9 +17,10 @@ namespace Pigalev_API_beautiful_places.Controllers
         private BaseData db = new BaseData();
 
         // GET: api/Grades
-        public IQueryable<Grades> GetGrades()
+        [ResponseType(typeof(List<GradesModels>))]
+        public IHttpActionResult GetPhones()
         {
-            return db.Grades;
+            return Ok(db.Grades.ToList().ConvertAll(x => new GradesModels(x)));
         }
 
         // GET: api/Grades/5

@@ -17,9 +17,10 @@ namespace Pigalev_API_beautiful_places.Controllers
         private BaseData db = new BaseData();
 
         // GET: api/Images
-        public IQueryable<Images> GetImages()
+        [ResponseType(typeof(List<ImagesModels>))]
+        public IHttpActionResult GetPhones()
         {
-            return db.Images;
+            return Ok(db.Images.ToList().ConvertAll(x => new ImagesModels(x)));
         }
 
         // GET: api/Images/5

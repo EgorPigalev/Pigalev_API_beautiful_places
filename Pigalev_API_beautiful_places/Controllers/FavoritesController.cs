@@ -17,9 +17,10 @@ namespace Pigalev_API_beautiful_places.Controllers
         private BaseData db = new BaseData();
 
         // GET: api/Favorites
-        public IQueryable<Favorites> GetFavorites()
+        [ResponseType(typeof(List<FavoritesModels>))]
+        public IHttpActionResult GetPhones()
         {
-            return db.Favorites;
+            return Ok(db.Favorites.ToList().ConvertAll(x => new FavoritesModels(x)));
         }
 
         // GET: api/Favorites/5

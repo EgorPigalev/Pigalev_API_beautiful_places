@@ -30,6 +30,7 @@ namespace Pigalev_API_beautiful_places.Models
         public int id_type_locality { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
+        public string main_image { get; set; }
         public bool accepted { get; set; }
     
         public virtual Address Address { get; set; }

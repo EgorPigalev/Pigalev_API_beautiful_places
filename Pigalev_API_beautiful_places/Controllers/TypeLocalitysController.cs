@@ -17,9 +17,10 @@ namespace Pigalev_API_beautiful_places.Controllers
         private BaseData db = new BaseData();
 
         // GET: api/TypeLocalitys
-        public IQueryable<TypeLocalitys> GetTypeLocalitys()
+        [ResponseType(typeof(List<TypeLocalitysModels>))]
+        public IHttpActionResult GetPhones()
         {
-            return db.TypeLocalitys;
+            return Ok(db.TypeLocalitys.ToList().ConvertAll(x => new TypeLocalitysModels(x)));
         }
 
         // GET: api/TypeLocalitys/5

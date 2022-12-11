@@ -17,9 +17,10 @@ namespace Pigalev_API_beautiful_places.Controllers
         private BaseData db = new BaseData();
 
         // GET: api/Roles
-        public IQueryable<Roles> GetRoles()
+        [ResponseType(typeof(List<RolesModels>))]
+        public IHttpActionResult GetPhones()
         {
-            return db.Roles;
+            return Ok(db.Roles.ToList().ConvertAll(x => new RolesModels(x)));
         }
 
         // GET: api/Roles/5
