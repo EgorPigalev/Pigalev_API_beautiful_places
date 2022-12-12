@@ -11,7 +11,6 @@
           </Key>
           <Property Name="id_address" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="locality" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="BeautifulPlace">
           <Key>
@@ -286,7 +285,6 @@
           </Key>
           <Property Name="id_address" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="locality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BeautifulPlace" Relationship="Pigaleve_project_mobileModel.FK_BeautifulPlace_Address" FromRole="Address" ToRole="BeautifulPlace" />
         </EntityType>
         <EntityType Name="BeautifulPlace">
@@ -486,7 +484,6 @@
           <EntitySetMapping Name="Address">
             <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.Address">
               <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="locality" ColumnName="locality" />
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="id_address" ColumnName="id_address" />
               </MappingFragment>

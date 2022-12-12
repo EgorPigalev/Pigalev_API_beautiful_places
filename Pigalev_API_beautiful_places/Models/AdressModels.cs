@@ -10,12 +10,10 @@ namespace Pigalev_API_beautiful_places.Models
     {
         public int id_address { get; set; }
         public string country { get; set; }
-        public string locality { get; set; }
         public AdressModels(Address address)
         {
             id_address = address.id_address;
             country = address.country;
-            locality = address.locality;
         }
     }
 }

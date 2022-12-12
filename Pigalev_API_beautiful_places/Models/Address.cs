@@ -22,7 +22,6 @@ namespace Pigalev_API_beautiful_places.Models
     
         public int id_address { get; set; }
         public string country { get; set; }
-        public string locality { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BeautifulPlace> BeautifulPlace { get; set; }
