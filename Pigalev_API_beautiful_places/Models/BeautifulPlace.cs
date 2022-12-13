@@ -19,7 +19,6 @@ namespace Pigalev_API_beautiful_places.Models
         {
             this.Favorites = new HashSet<Favorites>();
             this.Grades = new HashSet<Grades>();
-            this.Images = new HashSet<Images>();
         }
     
         public int id_beautiful_place { get; set; }
@@ -40,7 +39,5 @@ namespace Pigalev_API_beautiful_places.Models
         public virtual ICollection<Favorites> Favorites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grades> Grades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Images> Images { get; set; }
     }
 }

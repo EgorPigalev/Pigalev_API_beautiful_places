@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\API\Pigalev_API_beautiful_places\Pigalev_API_beautiful_places\Models\BaseData.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\ПигалевЕД\Source\Repos\Pigalev_API_beautiful_places\Pigalev_API_beautiful_places\Models\BaseData.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

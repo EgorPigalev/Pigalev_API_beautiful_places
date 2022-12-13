@@ -168,7 +168,6 @@
     <Compile Include="Controllers\FavoritesController.cs" />
     <Compile Include="Controllers\GradesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TypeLocalitysController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -207,10 +206,6 @@
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GradesModels.cs" />
-    <Compile Include="Models\Images.cs">
-      <DependentUpon>BaseData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ImagesModels.cs" />
     <Compile Include="Models\Roles.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
@@ -272,6 +267,7 @@
     <Content Include="Models\BaseData.edmx.diagram">
       <DependentUpon>BaseData.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
