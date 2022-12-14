@@ -28,12 +28,38 @@ namespace Pigalev_API_beautiful_places.Controllers
             return Ok(db.BeautifulPlace.ToList().ConvertAll(x => new BeautifukPlacesModel(x)));
         }
 
-        // GET: api/BeautifulPlaces/5
-        [ResponseType(typeof(BeautifulPlace))]
-        public IHttpActionResult GetCountBeautifulPlaceUser(int id_user)
+        // GET: api/BeautifulPlaces
+        [ResponseType(typeof(List<BeautifukPlacesModel>))]
+        public IHttpActionResult GetBeautifulPlaceUser(int id, bool b)
         {
-            List<BeautifulPlace> beautifulPlaces = db.BeautifulPlace.Where(x=>x.id_user == id_user).ToList();
-            return Ok(beautifulPlaces.Count);
+            List<BeautifulPlace> beautifulPlaces = db.BeautifulPlace.Where(x => x.id_user == id).ToList();
+            beautifulPlaces = beautifulPlaces.Where(x => x.accepted == b).ToList();
+            return Ok(beautifulPlaces.ConvertAll(x => new BeautifukPlacesModel(x)));
+        }
+
+        // GET: api/BeautifulPlaces
+        [ResponseType(typeof(List<BeautifukPlacesModel>))]
+        public IHttpActionResult GetBeautifulPlace(bool b)
+        {
+            List<BeautifulPlace> beautifulPlaces = db.BeautifulPlace.Where(x => x.accepted == b).ToList();
+            return Ok(beautifulPlaces.ConvertAll(x => new BeautifukPlacesModel(x)));
+        }
+
+        // GET: api/BeautifulPlaces
+        [ResponseType(typeof(List<BeautifukPlacesModel>))]
+        public IHttpActionResult GetBeautifulPlaceFavorite(int id_user)
+        {
+            List<Favorites> favorites = db.Favorites.Where(x => x.id_user == id_user).ToList();
+
+            List<BeautifulPlace> beautifulPlaces = new List<BeautifulPlace>();
+
+            foreach (Favorites favorite in favorites)
+            {
+                BeautifulPlace beautifulPlace = db.BeautifulPlace.FirstOrDefault(x => x.id_beautiful_place == favorite.id_beautiful_place);
+                beautifulPlaces.Add(beautifulPlace);
+            }
+
+            return Ok(beautifulPlaces.ConvertAll(x => new BeautifukPlacesModel(x)));
         }
 
         // GET: api/BeautifulPlaces/5

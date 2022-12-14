@@ -45,6 +45,15 @@ namespace Pigalev_API_beautiful_places.Controllers
         }
 
         // GET: api/Users
+        [ResponseType(typeof(List<UsersModels>))] // Метод для проверки наличия пользователя в базе
+        public int GetUsersRegistration(int id_user)
+        {
+            List<BeautifulPlace> beautifulPlaces = db.BeautifulPlace.Where(x => x.id_user == id_user).ToList();
+            beautifulPlaces = beautifulPlaces.Where(x => x.accepted == true).ToList();
+            return beautifulPlaces.Count;
+        }
+
+        // GET: api/Users
         [ResponseType(typeof(List<UsersModels>))] // Метод для авторизации
         public int GetUsersLogin(string login, string password)
         {
