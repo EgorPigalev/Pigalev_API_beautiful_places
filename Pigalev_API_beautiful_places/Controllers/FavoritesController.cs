@@ -6,8 +6,10 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.UI.WebControls;
 using Pigalev_API_beautiful_places.Models;
 
 namespace Pigalev_API_beautiful_places.Controllers
@@ -15,6 +17,11 @@ namespace Pigalev_API_beautiful_places.Controllers
     public class FavoritesController : ApiController
     {
         private BaseData db = new BaseData();
+
+        public FavoritesController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
 
         // GET: api/Favorites
         [ResponseType(typeof(List<FavoritesModels>))]
@@ -34,6 +41,22 @@ namespace Pigalev_API_beautiful_places.Controllers
             }
 
             return Ok(favorites);
+        }
+
+        [Route("api/Favorites/proverkaLike")]
+        [HttpGet]
+        public bool proverkaLike(int id_beautifulPlace, int id_user)
+        {
+            List<Favorites> favorites = db.Favorites.Where(x => x.id_user == id_user).ToList();
+            favorites = favorites.Where(x => x.id_beautiful_place == id_beautifulPlace).ToList();
+            if(favorites.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         // PUT: api/Favorites/5
@@ -100,6 +123,14 @@ namespace Pigalev_API_beautiful_places.Controllers
             db.SaveChanges();
 
             return Ok(favorites);
+        }
+
+        [Route("api/Favorites/deleteFavorite")]
+        [HttpDelete]
+        public void deleteFavorite(int id_beautifulPlace, int id_user)
+        {
+            Favorites favorites = db.Favorites.FirstOrDefault(x => x.id_user == id_user && x.id_beautiful_place == id_beautifulPlace);
+            db.Favorites.Remove(favorites);
         }
 
         protected override void Dispose(bool disposing)

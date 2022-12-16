@@ -125,22 +125,18 @@ namespace Pigalev_API_beautiful_places.Controllers
             return CreatedAtRoute("DefaultApi", new { id = beautifulPlace.id_beautiful_place }, beautifulPlace);
         }
 
-        // POST: api/BeautifulPlaces
-        [ResponseType(typeof(BeautifulPlace))]
-        public IHttpActionResult PostBeautifulPlace(BeautifulPlace beautifulPlace, string country, string type_locality)
+        public int GetIdAdress(string country)
         {
-            if (!ModelState.IsValid)
+            int id = 0;
+            List<Address> address = db.Address.ToList();
+            foreach (Address addressItem in address)
             {
-                return BadRequest(ModelState);
+                if(addressItem.country == country)
+                {
+                    id = addressItem.id_address;
+                }
             }
-            Address address = db.Address.FirstOrDefault(x => x.country == country);
-            beautifulPlace.id_address = address.id_address;
-            TypeLocalitys typeLocalitys = db.TypeLocalitys.FirstOrDefault(x => x.type_locality == type_locality);
-            beautifulPlace.id_type_locality = typeLocalitys.id_type_locality;
-            db.BeautifulPlace.Add(beautifulPlace);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = beautifulPlace.id_beautiful_place }, beautifulPlace);
+            return id;
         }
 
         // DELETE: api/BeautifulPlaces/5

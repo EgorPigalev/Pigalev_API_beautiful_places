@@ -15,7 +15,7 @@ namespace Pigalev_API_beautiful_places.Models
         public int id_type_locality { get; set; }
         public float latitude { get; set; }
         public float longitude { get; set; }
-        public string main_image { get; set; }
+        public string image { get; set; }
         public bool accepted { get; set; }
 
 
@@ -29,7 +29,7 @@ namespace Pigalev_API_beautiful_places.Models
             id_type_locality = beautifulPlace.id_type_locality;
             latitude = (float)beautifulPlace.latitude;
             longitude = (float)beautifulPlace.longitude;
-            main_image = beautifulPlace.main_image;
+            image = beautifulPlace.image;
             accepted = beautifulPlace.accepted;
         }
     }

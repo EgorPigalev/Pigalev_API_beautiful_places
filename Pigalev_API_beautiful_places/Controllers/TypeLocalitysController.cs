@@ -16,6 +16,11 @@ namespace Pigalev_API_beautiful_places.Controllers
     {
         private BaseData db = new BaseData();
 
+        public TypeLocalitysController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
+
         // GET: api/TypeLocalitys
         [ResponseType(typeof(List<TypeLocalitysModels>))]
         public IHttpActionResult GetTypeLocalitys()

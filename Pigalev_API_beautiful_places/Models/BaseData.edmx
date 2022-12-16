@@ -24,7 +24,7 @@
           <Property Name="id_type_locality" Type="int" Nullable="false" />
           <Property Name="latitude" Type="float" Nullable="false" />
           <Property Name="longitude" Type="float" Nullable="false" />
-          <Property Name="main_image" Type="nvarchar(max)" />
+          <Property Name="image" Type="nvarchar(max)" />
           <Property Name="accepted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Favorites">
@@ -269,7 +269,7 @@
           <Property Name="id_type_locality" Type="Int32" Nullable="false" />
           <Property Name="latitude" Type="Double" Nullable="false" />
           <Property Name="longitude" Type="Double" Nullable="false" />
-          <Property Name="main_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="accepted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Pigaleve_project_mobileModel.FK_BeautifulPlace_Address" FromRole="BeautifulPlace" ToRole="Address" />
           <NavigationProperty Name="TypeLocalitys" Relationship="Pigaleve_project_mobileModel.FK_BeautifulPlace_TypeLocalitys" FromRole="BeautifulPlace" ToRole="TypeLocalitys" />
@@ -441,7 +441,7 @@
             <EntityTypeMapping TypeName="Pigaleve_project_mobileModel.BeautifulPlace">
               <MappingFragment StoreEntitySet="BeautifulPlace">
                 <ScalarProperty Name="accepted" ColumnName="accepted" />
-                <ScalarProperty Name="main_image" ColumnName="main_image" />
+                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="id_type_locality" ColumnName="id_type_locality" />

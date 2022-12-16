@@ -16,11 +16,32 @@ namespace Pigalev_API_beautiful_places.Controllers
     {
         private BaseData db = new BaseData();
 
+        public GradesController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
+
         // GET: api/Grades
         [ResponseType(typeof(List<GradesModels>))]
         public IHttpActionResult GetPhones()
         {
             return Ok(db.Grades.ToList().ConvertAll(x => new GradesModels(x)));
+        }
+
+        [Route("api/Grades/proverkaGrades")]
+        [HttpGet]
+        public bool proverkaFavorite(int id_beautifulPlace, int id_user)
+        {
+            List<Grades> grades = db.Grades.Where(x => x.id_user == id_user).ToList();
+            grades = grades.Where(x => x.id_beautiful_place == id_beautifulPlace).ToList();
+            if (grades.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         // GET: api/Grades/5
@@ -102,6 +123,15 @@ namespace Pigalev_API_beautiful_places.Controllers
             return Ok(grades);
         }
 
+        [Route("api/Grades/deleteGrades")]
+        [HttpDelete]
+        public IHttpActionResult deleteGrades(int id_beautifulPlace, int id_user)
+        {
+            Grades grades = db.Grades.FirstOrDefault(x => x.id_user == id_user && x.id_beautiful_place == id_beautifulPlace);
+            db.Grades.Remove(grades);
+            db.SaveChanges();
+            return Ok(grades);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

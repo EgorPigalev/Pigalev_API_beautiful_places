@@ -16,6 +16,11 @@ namespace Pigalev_API_beautiful_places.Controllers
     {
         private BaseData db = new BaseData();
 
+        public AddressesController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
+
         // GET: api/Addresses
         [ResponseType(typeof(List<AdressModels>))]
         public IHttpActionResult GetPhones()
