@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6b31cc14d3a848aa92fe5cbc81b043fd" Name="Diagram1">
-        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Address" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Address" Width="1.5" PointX="3" PointY="7.125" />
         <EntityTypeShape EntityType="Pigaleve_project_mobileModel.BeautifulPlace" Width="1.5" PointX="5.25" PointY="2.75" />
-        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Favorites" Width="1.5" PointX="7.5" PointY="0.75" />
-        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Grades" Width="1.5" PointX="7.5" PointY="3.75" />
+        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Favorites" Width="1.5" PointX="7.5" PointY="3.75" />
+        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Grades" Width="1.5" PointX="7.5" PointY="0.75" />
         <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Roles" Width="1.5" PointX="0.75" PointY="4" />
-        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.TypeLocalitys" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="Pigaleve_project_mobileModel.TypeLocalitys" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="Pigaleve_project_mobileModel.Users" Width="1.5" PointX="3" PointY="3.375" />
         <AssociationConnector Association="Pigaleve_project_mobileModel.FK_BeautifulPlace_Address" />
         <AssociationConnector Association="Pigaleve_project_mobileModel.FK_BeautifulPlace_TypeLocalitys" />

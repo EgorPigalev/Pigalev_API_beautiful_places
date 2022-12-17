@@ -68,7 +68,9 @@
           <Property Name="id_role" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_BeautifulPlace_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -80,7 +82,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BeautifulPlace_TypeLocalitys">
-          <End Role="TypeLocalitys" Type="Self.TypeLocalitys" Multiplicity="1" />
+          <End Role="TypeLocalitys" Type="Self.TypeLocalitys" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeLocalitys">
@@ -92,7 +96,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BeautifulPlace_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -104,7 +110,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Favorites_BeautifulPlace">
-          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BeautifulPlace">
@@ -128,7 +136,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Grades_BeautifulPlace">
-          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1" />
+          <End Role="BeautifulPlace" Type="Self.BeautifulPlace" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BeautifulPlace">
@@ -152,7 +162,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -328,7 +340,9 @@
           <NavigationProperty Name="Roles" Relationship="Pigaleve_project_mobileModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="FK_BeautifulPlace_Address">
-          <End Type="Pigaleve_project_mobileModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="Pigaleve_project_mobileModel.Address" Role="Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Pigaleve_project_mobileModel.BeautifulPlace" Role="BeautifulPlace" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -340,7 +354,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BeautifulPlace_TypeLocalitys">
-          <End Type="Pigaleve_project_mobileModel.TypeLocalitys" Role="TypeLocalitys" Multiplicity="1" />
+          <End Type="Pigaleve_project_mobileModel.TypeLocalitys" Role="TypeLocalitys" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Pigaleve_project_mobileModel.BeautifulPlace" Role="BeautifulPlace" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeLocalitys">
@@ -352,7 +368,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BeautifulPlace_Users">
-          <End Type="Pigaleve_project_mobileModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="Pigaleve_project_mobileModel.Users" Role="Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Pigaleve_project_mobileModel.BeautifulPlace" Role="BeautifulPlace" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -364,7 +382,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Favorites_BeautifulPlace">
-          <End Type="Pigaleve_project_mobileModel.BeautifulPlace" Role="BeautifulPlace" Multiplicity="1" />
+          <End Type="Pigaleve_project_mobileModel.BeautifulPlace" Role="BeautifulPlace" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Pigaleve_project_mobileModel.Favorites" Role="Favorites" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BeautifulPlace">
@@ -376,7 +396,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Grades_BeautifulPlace">
-          <End Type="Pigaleve_project_mobileModel.BeautifulPlace" Role="BeautifulPlace" Multiplicity="1" />
+          <End Type="Pigaleve_project_mobileModel.BeautifulPlace" Role="BeautifulPlace" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Pigaleve_project_mobileModel.Grades" Role="Grades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BeautifulPlace">
@@ -412,7 +434,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Roles">
-          <End Type="Pigaleve_project_mobileModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="Pigaleve_project_mobileModel.Roles" Role="Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Pigaleve_project_mobileModel.Users" Role="Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
