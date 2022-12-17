@@ -18,7 +18,6 @@ namespace Pigalev_API_beautiful_places.Models
         public string image { get; set; }
         public bool accepted { get; set; }
 
-
         public BeautifukPlacesModel(BeautifulPlace beautifulPlace)
         {
             id_beautiful_place = beautifulPlace.id_beautiful_place;

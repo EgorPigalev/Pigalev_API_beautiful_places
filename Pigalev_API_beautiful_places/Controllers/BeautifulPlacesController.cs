@@ -39,10 +39,56 @@ namespace Pigalev_API_beautiful_places.Controllers
 
         // GET: api/BeautifulPlaces
         [ResponseType(typeof(List<BeautifukPlacesModel>))]
-        public IHttpActionResult GetBeautifulPlace(bool b)
+        public IHttpActionResult GetBeautifulPlace(bool b, string name, int id_address, int id_type_locality, string fieldSort, string valueSort) // Метод для поиска и сортировки
         {
             List<BeautifulPlace> beautifulPlaces = db.BeautifulPlace.Where(x => x.accepted == b).ToList();
+            if (!string.IsNullOrWhiteSpace(name))  // если строка не пустая и если она не состоит из пробелов
+            {
+                beautifulPlaces = beautifulPlaces.Where(x => x.name.ToLower().Contains(name.ToLower())).ToList();
+            }
+            if(id_address != 0) // Фильтрация по стране
+            {
+                beautifulPlaces = beautifulPlaces.Where(x => x.id_address == id_address).ToList();
+            }
+            if (id_type_locality != 0) // Фильтрация по типу места
+            {
+                beautifulPlaces = beautifulPlaces.Where(x => x.id_type_locality == id_type_locality).ToList();
+            }
+            if (fieldSort != null) // Сортировка
+            {
+                Sorting(beautifulPlaces, fieldSort, valueSort);
+            }
             return Ok(beautifulPlaces.ConvertAll(x => new BeautifukPlacesModel(x)));
+        }
+
+        public List<BeautifulPlace> Sorting(List<BeautifulPlace> beautifulPlaces, string fieldSort, string valueSort) // Метод для сортировки
+        {
+            switch (fieldSort)
+            {
+                case ("По наименованию"):
+                    if (valueSort == "Возрастание")
+                    {
+                        beautifulPlaces.Sort((x, y) => x.name.CompareTo(y.name));
+                    }
+                    else
+                    {
+                        beautifulPlaces.Sort((x, y) => x.name.CompareTo(y.name));
+                        beautifulPlaces.Reverse();
+                    }
+                    break;
+                case ("По популярности"):
+                    if (valueSort == "Возрастание")
+                    {
+                        beautifulPlaces.Sort((x, y) => x.CountGrade.CompareTo(y.CountGrade));
+                    }
+                    else
+                    {
+                        beautifulPlaces.Sort((x, y) => x.CountGrade.CompareTo(y.CountGrade));
+                        beautifulPlaces.Reverse();
+                    }
+                    break;
+            }
+            return beautifulPlaces;
         }
 
         // GET: api/BeautifulPlaces
@@ -79,18 +125,23 @@ namespace Pigalev_API_beautiful_places.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBeautifulPlace(int id, BeautifulPlace beautifulPlace)
         {
-            if (!ModelState.IsValid)
+            BeautifulPlace beautiful = db.BeautifulPlace.FirstOrDefault(x => x.id_beautiful_place.Equals(id));
+
+            beautiful.name = beautifulPlace.name;
+            beautiful.description = beautifulPlace.description;
+            beautiful.id_address = beautifulPlace.id_address;
+            beautiful.id_type_locality = beautifulPlace.id_type_locality;
+            beautiful.latitude = beautifulPlace.latitude;
+            beautiful.longitude = beautifulPlace.longitude;
+            if (beautiful.image == "null")
             {
-                return BadRequest(ModelState);
+                beautiful.image = null;
             }
-
-            if (id != beautifulPlace.id_beautiful_place)
+            else
             {
-                return BadRequest();
+                beautiful.image = beautifulPlace.image;
             }
-
-            db.Entry(beautifulPlace).State = EntityState.Modified;
-
+            beautiful.accepted = true;
             try
             {
                 db.SaveChanges();

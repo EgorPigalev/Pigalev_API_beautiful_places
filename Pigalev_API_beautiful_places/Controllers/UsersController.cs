@@ -55,16 +55,16 @@ namespace Pigalev_API_beautiful_places.Controllers
 
         // GET: api/Users
         [ResponseType(typeof(List<UsersModels>))] // Метод для авторизации
-        public int GetUsersLogin(string login, string password)
+        public Users GetUsersLogin(string login, string password)
         {
             Users user = db.Users.FirstOrDefault(x => x.login == login && x.password == password);
             if (user != null)
             {
-                return user.id_user;
+                return user;
             }
             else
             {
-                return 0;
+                return null;
             }
         }
 

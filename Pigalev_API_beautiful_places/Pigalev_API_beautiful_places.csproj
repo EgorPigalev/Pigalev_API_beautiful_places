@@ -206,6 +206,7 @@
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GradesModels.cs" />
+    <Compile Include="Models\PartialBeautifulPlace.cs" />
     <Compile Include="Models\Roles.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
