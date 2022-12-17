@@ -127,10 +127,12 @@ namespace Pigalev_API_beautiful_places.Controllers
 
         [Route("api/Favorites/deleteFavorite")]
         [HttpDelete]
-        public void deleteFavorite(int id_beautifulPlace, int id_user)
+        public IHttpActionResult deleteFavorite(int id_beautifulPlace, int id_user)
         {
             Favorites favorites = db.Favorites.FirstOrDefault(x => x.id_user == id_user && x.id_beautiful_place == id_beautifulPlace);
             db.Favorites.Remove(favorites);
+            db.SaveChanges();
+            return Ok(favorites);
         }
 
         protected override void Dispose(bool disposing)
