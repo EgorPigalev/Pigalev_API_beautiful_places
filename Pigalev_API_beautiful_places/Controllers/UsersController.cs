@@ -44,20 +44,24 @@ namespace Pigalev_API_beautiful_places.Controllers
             }
         }
 
+        
         // GET: api/Users
-        [ResponseType(typeof(List<UsersModels>))] // Метод для проверки наличия пользователя в базе
+        [ResponseType(typeof(List<UsersModels>))] // Метод для определения количества добавленных мест пользователем
         public int GetUsersRegistration(int id_user)
         {
             List<BeautifulPlace> beautifulPlaces = db.BeautifulPlace.Where(x => x.id_user == id_user).ToList();
             beautifulPlaces = beautifulPlaces.Where(x => x.accepted == true).ToList();
             return beautifulPlaces.Count;
         }
+        
 
         // GET: api/Users
         [ResponseType(typeof(List<UsersModels>))] // Метод для авторизации
         public Users GetUsersLogin(string login, string password)
         {
-            Users user = db.Users.FirstOrDefault(x => x.login == login && Convert.ToInt32(x.password) == password.GetHashCode());
+            List<Users> users = db.Users.Where(x => x.login == login).ToList();
+            string strPassword = Convert.ToString(password.GetHashCode());
+            Users user = users.FirstOrDefault(x => x.password == strPassword);
             if (user != null)
             {
                 return user;
@@ -88,8 +92,11 @@ namespace Pigalev_API_beautiful_places.Controllers
             Users user = db.Users.FirstOrDefault(x => x.id_user.Equals(id));
 
             user.login = users.login;
-            user.password = Convert.ToString(users.password.GetHashCode());
-            if(users.image == "null")
+            if(user.password != users.password)
+            {
+                user.password = Convert.ToString(users.password.GetHashCode());
+            }
+            if (users.image == "null")
             {
                 user.image = null;
             }
@@ -125,7 +132,7 @@ namespace Pigalev_API_beautiful_places.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            users.password = Convert.ToString(users.password.GetHashCode());
             db.Users.Add(users);
             db.SaveChanges();
 

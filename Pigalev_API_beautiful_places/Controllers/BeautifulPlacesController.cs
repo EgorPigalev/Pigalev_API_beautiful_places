@@ -176,19 +176,6 @@ namespace Pigalev_API_beautiful_places.Controllers
             return CreatedAtRoute("DefaultApi", new { id = beautifulPlace.id_beautiful_place }, beautifulPlace);
         }
 
-        public int GetIdAdress(string country)
-        {
-            int id = 0;
-            List<Address> address = db.Address.ToList();
-            foreach (Address addressItem in address)
-            {
-                if(addressItem.country == country)
-                {
-                    id = addressItem.id_address;
-                }
-            }
-            return id;
-        }
 
         // DELETE: api/BeautifulPlaces/5
         [ResponseType(typeof(BeautifulPlace))]

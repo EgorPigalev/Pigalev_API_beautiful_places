@@ -28,6 +28,15 @@ namespace Pigalev_API_beautiful_places.Controllers
             return Ok(db.Grades.ToList().ConvertAll(x => new GradesModels(x)));
         }
 
+        [Route("api/Grades/countGrades")]
+        [HttpGet]
+        public int countGrades(int id_beautifulPlace)
+        {
+            List<Grades> grades = db.Grades.Where(x => x.id_beautiful_place == id_beautifulPlace).ToList();
+            return grades.Count;
+        }
+
+
         [Route("api/Grades/proverkaGrades")]
         [HttpGet]
         public bool proverkaFavorite(int id_beautifulPlace, int id_user)
